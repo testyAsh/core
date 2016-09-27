@@ -2,6 +2,14 @@ from flask import render_template, jsonify
 from app import app
 import MySQLdb
 
+def connectDb():
+    db = MySQLdb.connect(host="localhost",
+                         user="kazafix",
+                         passwd="kazafix",
+                         db="Kazafix",
+                         charset='utf8')
+    cur = db.cursor()
+    return db, cur
 
 @app.route('/')
 @app.route('/index')
@@ -18,12 +26,7 @@ def jobs():
 
 @app.route('/jobs/get_jobs')
 def getJobs():
-    db = MySQLdb.connect(host="localhost",
-                         user="root",
-                         passwd="",
-                         db="Kazafix",
-                         charset='utf8')
-    cur = db.cursor()
+    db, cur = connectDb()
     cur.execute("SELECT UID,Name FROM Jobs")
     rows = cur.fetchall()
     r = []
@@ -42,12 +45,7 @@ def workers():
 
 @app.route('/workers/get_workers')
 def getWorkers():
-    db = MySQLdb.connect(host="localhost",
-                         user="root",
-                         passwd="",
-                         db="Kazafix",
-                         charset='utf8')
-    cur = db.cursor()
+    db, cur = connectDb()
     cur.execute(
         "SELECT UID,FirstName,LastName,PhoneNumber,LegalID,Address,City,Job,Score,RetrievalRule,Comments FROM Workers")
     rows = cur.fetchall()
