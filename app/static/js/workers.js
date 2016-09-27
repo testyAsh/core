@@ -1,0 +1,74 @@
+$(document).ready(function() {
+    fetchworkers();
+});
+
+function fetchworkers() {
+    $.getJSON('/workers/get_workers', {
+        }, function(data) {
+            var i;
+            workers = new Array();
+            for (i=0;i<data.result.length;i++)
+            {
+                var worker = new Array();
+                worker[0]=data.result[i].uid;
+                worker[1]=data.result[i].firstname;
+                worker[2]=data.result[i].lastname;
+                worker[3]=data.result[i].phonenumber;
+                worker[4]=data.result[i].legalid;
+                worker[5]=data.result[i].address;
+                worker[6]=data.result[i].city;
+                worker[7]=data.result[i].job;
+                worker[8]=data.result[i].score;
+                worker[9]=data.result[i].retrievalrule;
+                worker[10]=data.result[i].comments;
+                workers[i]=worker;
+                console.log(worker)
+            }
+            workers.sort();
+            createworkerList(workers);
+    });
+}
+
+function createworkerList(){
+    var i;
+    var html = '';
+    for (i=0;i<workers.length;i++)
+    {
+        html += '<tr>';
+        html += '<td>';
+        html += workers[i][0];
+        html += '</td>';
+        html += '<td>';
+        html += workers[i][1];
+        html += '</td>';
+        html += '<td>';
+        html += workers[i][2];
+        html += '</td>';
+        html += '<td>';
+        html += workers[i][3];
+        html += '</td>';
+        html += '<td>';
+        html += workers[i][4];
+        html += '</td>';
+        html += '<td>';
+        html += workers[i][5];
+        html += '</td>';
+        html += '<td>';
+        html += workers[i][6];
+        html += '</td>';
+        html += '<td>';
+        html += workers[i][7];
+        html += '</td>';
+        html += '<td>';
+        html += workers[i][8];
+        html += '</td>';
+        html += '<td>';
+        html += workers[i][9];
+        html += '</td>';
+        html += '<td>';
+        html += workers[i][10];
+        html += '</td>';
+        html += '</tr>';
+    }
+    document.getElementById("workerList").innerHTML = html;
+}
