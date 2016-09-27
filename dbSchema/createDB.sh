@@ -1,4 +1,4 @@
 set -e
 echo "Creating database"
-mysql -u root < database.sql
+sudo mysql -f < database.sql
 echo "Creation done"
