@@ -7,3 +7,7 @@ sudo apt-get install mysql-client -y
 sudo apt-get install mysql-server -y
 sudo easy_install pip
 sudo pip install -r requirements.txt
+sudo pip install sqlalchemy
+sudo pip install flask-sqlalchemy
+sudo pip install sqlalchemy-migrate
+sudo pip install flask-whooshalchemy
