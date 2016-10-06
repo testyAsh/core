@@ -27,7 +27,7 @@ class Client(db.Model):
     Orders = db.relationship('Order', backref='client', lazy='dynamic')
 
     def __repr__(self):
-        return '<Client %r>' % (self.FirstName)
+         return '<Client %r>' % (self.FirstName)
 
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -43,7 +43,7 @@ class Order(db.Model):
     Comments = db.Column(db.String(255), index=True, unique=False)
 
     def __repr__(self):
-        return '<Client %r>' % (self.FirstName)
+        return '<Order %r>' % (self.id)
 
 class Job(db.Model):
     id = db.Column(db.Integer, primary_key=True)
