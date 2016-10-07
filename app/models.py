@@ -14,7 +14,7 @@ class Worker(db.Model):
 
 
     def __repr__(self):
-        return '<Worker %r>' % (self.FirstName)
+        return '<%r Worker %r>' % (self.id, self.FirstName)
 
 class Client(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -48,11 +48,10 @@ class Order(db.Model):
 class Job(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     Name = db.Column(db.String(64), index=True, unique=False)
-    Comments = db.Column(db.String(255), index=True, unique=False)
     WorkerJobs = db.relationship('WorkerJob', backref='job', lazy='dynamic')
 
     def __repr__(self):
-        return '<Job %r>' % (self.Name)
+        return '<% r Job %r>' % (self.id, self.Name)
 
 class WorkerJob(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -60,4 +59,4 @@ class WorkerJob(db.Model):
     Worker_id = db.Column(db.Integer, db.ForeignKey('worker.id'))
 
     def __repr__(self):
-       return '<WorkerJob %r>' % (self.id)        
+       return '<WorkerJob %r %r>' % (self.id, self.Worker_id)        
