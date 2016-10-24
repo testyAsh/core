@@ -105,6 +105,11 @@ def getWorkers():
     return jsonify(result=r)
     db.close()
 
+@app.route('/addWorker')
+def signUp():
+    return render_template('addworker.html')
+
+
 
 # @app.route('/workerJobs')
 # def workersJobs():
