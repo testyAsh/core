@@ -106,9 +106,24 @@ def getWorkers():
     db.close()
 
 @app.route('/addWorker')
-def signUp():
+def addWorker():
     return render_template('addworker.html')
 
+
+@app.route('/addNewWorker', methods=['POST', 'GET'])
+def addNewworker():
+    firstname = request.form['Nom'];
+    lastname = request.form['Prenom'];
+    phonenumber = request.form['Numero'];
+    legalid = request.form['CIN'];
+    address = request.form['Addresse'];
+    retrievalrule = request.form['Recouvrement'];
+    comments = request.form['Commentaires'];
+    db, cur = connectDb()
+    cur.execute("INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",(firstName,lastName,phoneNumber,legalID,address,retrievalRule,comments))
+    # return json.dumps({'status':'OK','user':firstname});
+    return redirect('/workers/get_workers')
+    db.close()
 
 
 # @app.route('/workerJobs')
