@@ -16,11 +16,9 @@ function fetchworkers() {
                 worker[3]=data.result[i].phonenumber;
                 worker[4]=data.result[i].legalid;
                 worker[5]=data.result[i].address;
-                worker[6]=data.result[i].city;
-                worker[7]=data.result[i].job;
-                worker[8]=data.result[i].score;
-                worker[9]=data.result[i].retrievalrule;
-                worker[10]=data.result[i].comments;
+                worker[6]=data.result[i].job;
+                worker[7]=data.result[i].retrievalrule;
+                worker[8]=data.result[i].comments;
                 workers[i]=worker;
                 console.log(worker)
             }
@@ -63,12 +61,6 @@ function createworkerList(){
         html += workers[i][8];
         html += '</td>';
         html += '<td>';
-        html += workers[i][9];
-        html += '</td>';
-        html += '<td>';
-        html += workers[i][10];
-        html += '</td>';
-        html += '</tr>';
     }
     document.getElementById("workerList").innerHTML = html;
 }

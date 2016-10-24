@@ -1,7 +1,6 @@
 from app import db
 from flask.ext.sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from sqlalchemy.inspection import inspect
 
 # def to_json(inst, cls):
 #     """Jsonify the sql alchemy query result."""
@@ -21,6 +20,15 @@ db = SQLAlchemy()
 #         else:
 #             d[c.name] = v
 #     return json.dumps(d)
+
+class Serializer(object):
+
+    def serialize(self):
+        return {c: getattr(self, c) for c in inspect(self).attrs.keys()}
+
+    @staticmethod
+    def serialize_list(l):
+        return [m.serialize() for m in l]
 
 
 class Worker(db.Model):
@@ -52,11 +60,11 @@ class Worker(db.Model):
            'Comments'         : self.Comments, 
        }
 
-    @property
-    def serialize_many2many(self):
-       # """ Return object's relations in easily serializeable format.
-       # NB! Calls many2many's serialize property. """
-       return [ item.serialize for item in self.many2many]    
+    # @property
+    # def serialize_many2many(self):
+    #    # """ Return object's relations in easily serializeable format.
+    #    # NB! Calls many2many's serialize property. """
+    #    return [ item.serialize for item in self.worker]    
 
 
 class Client(db.Model):
@@ -88,30 +96,30 @@ class Order(db.Model):
     def __repr__(self):
         return '<Order %r>' % (self.id)
 
-    @property
-    def serialize(self):
-       # """Return object data in easily serializeable format"""
-        return {
-           'id'         : self.id,
-           'State'         : self.State,
-           'Contactthrough'         : self.Contactthrough, 
-           'InsertionDate'         :  self.InsertionDate,
-           'ExecutionDate'         : self.ExecutionDate,
-           'ClienPaidFees'         : self.ClienPaidFees,
-           'ReportedPaidFees'         : self.ReportedPaidFees,
-           'RetrievalReceived'         : self.RetrievalReceived,
-           'Client_id'         : self.serialize_many2many,
-           'Worker_id'         : self.serialize_many2many,
-           'Comments'         : self.Comments, 
-       }
+    # @property
+    # def serialize(self):
+    #    # """Return object data in easily serializeable format"""
+    #     return {
+    #        'id'         : self.id,
+    #        'State'         : self.State,
+    #        'Contactthrough'         : self.Contactthrough, 
+    #        'InsertionDate'         :  self.InsertionDate,
+    #        'ExecutionDate'         : self.ExecutionDate,
+    #        'ClienPaidFees'         : self.ClienPaidFees,
+    #        'ReportedPaidFees'         : self.ReportedPaidFees,
+    #        'RetrievalReceived'         : self.RetrievalReceived,
+    #        'Client_id'         : self.serialize_many2many,
+    #        'Worker_id'         : self.serialize_many2many,
+    #        'Comments'         : self.Comments, 
+    #    }
 
-    @property
-    def serialize_many2many(self):
-       # """ Return object's relations in easily serializeable format.
-       # NB! Calls many2many's serialize property. """
-       return [ item.serialize for item in self.many2many]
+    # @property
+    # def serialize_many2many(self):
+    # """ Return object's relations in easily serializeable format.
+    # NB! Calls many2many's serialize property. """
+    #    return [ item.serialize for item in self.many2many]
 
-class Job(db.Model):
+class Job(db.Model, Serializer):
     id = db.Column(db.Integer, primary_key=True)
     Name = db.Column(db.String(64), index=True, unique=False)
     WorkerJobs = db.relationship('WorkerJob', backref='job', lazy='dynamic')
@@ -126,6 +134,12 @@ class Job(db.Model):
            'id'         : self.id,
            'Name'       : self.Name,
        }
+
+    # @property
+    # def serialize_many2many(self):
+    #    # """ Return object's relations in easily serializeable format.
+    #    # NB! Calls many2many's serialize property. """
+    #    return [ item.serialize for item in self.Job]      
  
 
 class WorkerJob(db.Model):
@@ -134,7 +148,7 @@ class WorkerJob(db.Model):
     Worker_id = db.Column(db.Integer, db.ForeignKey('worker.id'))
 
     def __repr__(self):
-       return '<WorkerJob %r %r>' % (self.id, self.Worker_id)
+       return '<WorkerJob %r %r %r>' % (self.id, self.Worker_id, self.Job_id)
 
     @property
     def serialize(self):
@@ -149,7 +163,7 @@ class WorkerJob(db.Model):
     # def serialize_many2many(self):
     #    # """ Return object's relations in easily serializeable format.
     #    # NB! Calls many2many's serialize property. """
-    #    return [ item.serialize for item in self.job]        
+    #    return [ item.serialize for item in self.WorkerJob]        
 
 
 

@@ -8,9 +8,7 @@ CREATE TABLE Workers (
   PhoneNumber varchar(50),
   LegalID varchar(20),
   Address varchar(255),
-  City varchar(30),
   Job varchar(255),
-  Score int,
   RetrievalRule varchar(255),
   Comments mediumtext
 );
@@ -19,10 +17,8 @@ CREATE TABLE Clients (
   FirstName varchar(20) NOT NULL,
   LastName varchar(20),
   PhoneNumber varchar(20),
-  ContactThrough varchar(20),
+  PreferredContact varchar(20),
   Address varchar(255),
-  City varchar(30),
-  Score int,
   Comments mediumtext
 );
 CREATE TABLE Bookings (
@@ -30,13 +26,12 @@ CREATE TABLE Bookings (
   State varchar(20) NOT NULL,
   ClientID int,
   WorkerID int,
+  Contactthrough varchar(20),
   InsertionDate DATETIME,
   ExecutionDate DATETIME,
   ClientPaidFees double,
   ReportedPaidFees double,
   RetrievalReceived double,
-  ClientScore int,
-  WorkerScore int,
   FOREIGN KEY (ClientID) REFERENCES Clients(UID),
   FOREIGN KEY (WorkerID) REFERENCES Workers(UID)
 );
@@ -87,67 +82,67 @@ INSERT INTO Jobs (name) VALUES ("Ventilateur");
 INSERT INTO Jobs (name) VALUES ("Verre");
 
 
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Walid","Debbichi","20 242 128 - 70 728 159","07402288","29 Rue Khaled Ibn Alwalid","L'Aouina","20%","On n'a pas travaillé avec lui");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Adel","Hadchi","23,473,864","05408828","Rue Khaled Ibn Alwalid, Les Palmeraies","L'Aouina","20%","Client a dit qu'il est cher");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Abdessalem","Ben Ammar","54,356,565","05445994","20 Rue Kelibia","L'Aouina","20%","Client a dit qu'il est cher");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Anis","Chemkhi","24,552,733","07933188","Cité Les Palmeraies","L'Aouina","20%","Client a dit qu'il est cher");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Hassene","Ben Saleh","50,900,648","05369441","Route de L'Aéroport","Sfax","20%","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Ali","Ansi","23,339,040","09950718","Cité Bourak","L'Aouina","20%","Lazy");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Mansour","Ouerghi","98,661,881","08045863","93 Rue Khaled Ibn Alwalid","L'Aouina","20%","Prend son temps");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Najoua","Charfi","22,319,659","01340547","Cité Les Palmeraies, Rés Essaada","L'Aouina","20%","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Mohamed","Ben Ghanmi","96,562,838","00328664","6 Rue de l'ecole","L'Aouina","20%","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Mohamed","Abdouli","51,061,520","","Ain Zaghouan","L'Aouina","20%","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Ayoub","Ayari","58,630,018","04839389","Av Louis Braille","Tunis","20%","Istallation seulement");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Bassem / Zouhair","Houidi","21,326,515","","Cité Les Palmeraies","L'Aouina","20%","Sérieux");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Oussama","Hilaty","97 724 651 - 24 576 039","04825117","LSI - 16 Av Habib Bourguiba Bardo","Bardo","20%","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Amin","Safi","21 757 355 - 55 116 281","08194421","Rue Carthage N 27","L'Aouina","20%","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Ines","","23,774,471","","","","","à enlever");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Kamel","Derouiche","50 623 686 - 28 752 693","","","","","à enlever Il a raté un RDV et ne décroche pas le téléphone");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Taieb","","","","","","","à enlever");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Bernadette","","N/A","","","","","à enlever");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Ramzi","Ghesmi","53,528,043","","","L'Aouina","20%","Contrat à faire - contact direct sans passer par Chokri");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Hichem","","52,254,321","","","L'Aouina","20%","Lazy");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Saber","Yaakoubi","27 452 773 - 22 841 406","","","L'Aouina","20%","disponbile a partir de juin");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Habib Aimen","Bin Aoun","44 306 497 - 24 597 665","","","L'Aouina","","Sérieux et dispo");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Sylvie","","52 866 826","","","L'Aouina","","à enlever");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Ezzeddine","","22 616 425","","","L'Aouina","","à enlever");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Tarek","","27 474 701 - 22 804 654","","","L'Aouina","","Pas très disponible");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Ami Oumayma","","20 016 774","","","Megrine","","à enlever");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Solange","","94 366 065","","","","","à enlever");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Taieb","Charni","97 248 211 - 97 248 212","","","L'Aouina","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Moez","Charni","97 248 211 - 97 248 212","","","L'Aouina","","Sérieux mais cher pour petits traveaux");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Béchir - Abdessattar","","92 767 197 - 54 477 427","","","L'Aouina","20%","celui qui a raté 3600");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Ammar","Barhoumi","22 762 124 - 54 762 124","","Av Khaled ibn Walid, Cité Mongi Slim","L'Aouina","20%","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Naceur","","22 038 166","","","L'Aouina","20%","Sérieux sauf pour petit traveaux");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Amor","Gdhifi","96 235 139 - 20 584 081","","","L'Aouina","20%","Sérieux");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Sabrine","Ben Hadji","22 414 190","","","Le Kram","","Sérieux");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Elisa","","94 366 065","","","","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Linda","","50 667 087","","","","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Alida","","55 737 210","","","","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Abdallah","","22 685 680","","","Soukra","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Maï","","54 725 708","","","","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Sami","Kaddoussi","23 919 204","","","Khaznadar","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Yacine","","52 372 811","","","","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Alice","","50 635 686","","","","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Salwa","","21 777 143","","","Magro Ariana","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Fathi","Nouioui","94 285 137","","","Zouhour","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Thuraya","","","","","Dar Fadhal","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Amelie","","58 152 626","","","Bhar Lazrag","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Dalila","","27 894 414","","","Borj Louzir","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Nebil","Brahmi","53 251 490","","","","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Slim","Masmoudi","98 531 357","07010705","25 Rue Khmaies Hajri 1008","Tunis","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Zied","Ben Ammar","20 558 168 / 98 558 168","","","Tunis","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Mariam 1","","50 10 24 48","","","Tunis","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Ami","","54 96 40 32","","","Tunis","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Mandi","","54 964 037","","","Tunis","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Valérie","","53 617 795","","","Tunis","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Mariam 2","","53 441 596","","","Tunis","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Fabienne","","25 601 039","","","Tunis","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Awa","","58 661 067","","","Tunis","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Anne","","52 736 197","","","Tunis","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Natasha","","52 060 412","","","Tunis","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Mosleh","","97 437 544","","","Tunis","","");
-INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,City,RetrievalRule,Comments) Values("Wissem","","22 896 766","","","Tunis","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Walid","Debbichi","20 242 128 - 70 728 159","07402288","29 Rue Khaled Ibn Alwalid","20%","On n'a pas travaillé avec lui");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Adel","Hadchi","23,473,864","05408828","Rue Khaled Ibn Alwalid, Les Palmeraies","20%","Client a dit qu'il est cher");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Abdessalem","Ben Ammar","54,356,565","05445994","20 Rue Kelibia","20%","Client a dit qu'il est cher");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Anis","Chemkhi","24,552,733","07933188","Cité Les Palmeraies","20%","Client a dit qu'il est cher");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Hassene","Ben Saleh","50,900,648","05369441","Route de L'Aéroport","20%","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Ali","Ansi","23,339,040","09950718","Cité Bourak","20%","Lazy");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Mansour","Ouerghi","98,661,881","08045863","93 Rue Khaled Ibn Alwalid","20%","Prend son temps");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Najoua","Charfi","22,319,659","01340547","Cité Les Palmeraies, Rés Essaada","20%","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Mohamed","Ben Ghanmi","96,562,838","00328664","6 Rue de l'ecole","20%","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Mohamed","Abdouli","51,061,520","","Ain Zaghouan","20%","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Ayoub","Ayari","58,630,018","04839389","Av Louis Brai","20%","Istallation seulement");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Bassem / Zouhair","Houidi","21,326,515","","Cité Les Palmeraies","20%","Sérieux");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Oussama","Hilaty","97 724 651 - 24 576 039","04825117","LSI - 16 Av Habib Bourguiba Bardo","20%","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Amin","Safi","21 757 355 - 55 116 281","08194421","Rue Carthage N 27","20%","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Ines","","23,774,471","","","","à enlever");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Kamel","Derouiche","50 623 686 - 28 752 693","","","","à enlever Il a raté un RDV et ne décroche pas le téléphone");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Taieb","","","","","","à enlever");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Bernadette","","N/A","","","","à enlever");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Ramzi","Ghesmi","53,528,043","","","20%","Contrat à faire - contact direct sans passer par Chokri");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Hichem","","52,254,321","","","20%","Lazy");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Saber","Yaakoubi","27 452 773 - 22 841 406","","","20%","disponbile a partir de juin");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Habib Aimen","Bin Aoun","44 306 497 - 24 597 665","","","","Sérieux et dispo");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Sylvie","","52 866 826","","","","à enlever");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Ezzeddine","","22 616 425","","","","à enlever");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Tarek","","27 474 701 - 22 804 654","","","","Pas très disponible");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Ami Oumayma","","20 016 774","","Megrine","","à enlever");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Solange","","94 366 065","","","","à enlever");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Taieb","Charni","97 248 211 - 97 248 212","","","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Moez","Charni","97 248 211 - 97 248 212","","","","Sérieux mais cher pour petits traveaux");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Béchir - Abdessattar","","92 767 197 - 54 477 427","","","20%","celui qui a raté 3600");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Ammar","Barhoumi","22 762 124 - 54 762 124","","Av Khaled ibn Walid, Cité Mongi Slim","20%","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Naceur","","22 038 166","","","20%","Sérieux sauf pour petit traveaux");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Amor","Gdhifi","96 235 139 - 20 584 081","","","20%","Sérieux");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Sabrine","Ben Hadji","22 414 190","","Le Kram","","Sérieux");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Elisa","","94 366 065","","","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Linda","","50 667 087","","","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Alida","","55 737 210","","","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Abdallah","","22 685 680","","Soukra","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Maï","","54 725 708","","","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Sami","Kaddoussi","23 919 204","","Khaznadar","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Yacine","","52 372 811","","","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Alice","","50 635 686","","","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Salwa","","21 777 143","","Magro Ariana","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Fathi","Nouioui","94 285 137","","Zouhour","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Thuraya","","","","Dar Fadhal","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Amelie","","58 152 626","","Bhar Lazrag","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Dalila","","27 894 414","","Borj Louzir","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Nebil","Brahmi","53 251 490","","","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Slim","Masmoudi","98 531 357","07010705","25 Rue Khmaies Hajri 1","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Zied","Ben Ammar","20 558 168 / 98 558 168","","Tunis","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Mariam 1","","50 10 24 48","","Tunis","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Ami","","54 96 40 32","","Tunis","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Mandi","","54 964 037","","Tunis","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Valérie","","53 617 795","","Tunis","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Mariam 2","","53 441 596","","Tunis","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Fabienne","","25 601 039","","Tunis","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Awa","","58 661 067","","Tunis","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Anne","","52 736 197","","Tunis","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Natasha","","52 060 412","","Tunis","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Mosleh","","97 437 544","","Tunis","","");
+INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values("Wissem","","22 896 766","","Tunis","","");
 
 
 
