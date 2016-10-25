@@ -120,9 +120,9 @@ def addNewworker():
     retrievalrule = request.form['Recouvrement'];
     comments = request.form['Commentaires'];
     db, cur = connectDb()
-    cur.execute("INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) Values VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",(firstName,lastName,phoneNumber,legalID,address,retrievalRule,comments))
-    # return json.dumps({'status':'OK','user':firstname});
-    return redirect('/workers/get_workers')
+    cur.execute("INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) VALUES (%s,%s,%s,%s,%s,%s,%s)",(firstName,lastName,phoneNumber,legalID,address,retrievalRule,comments))
+    return json.dumps({'status':'OK','worker':firstname});
+    # return redirect('/workers/get_workers')
     db.close()
 
 
