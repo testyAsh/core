@@ -113,25 +113,26 @@ def addWorker():
 @app.route('/addNewWorker', methods=['POST', 'GET'])
 def addNewworker():
     db, cur = connectDb()
-    if request.method=='POST':
-     firstname = request.form['Nom']
-     lastname = request.form['Prenom']
-     phonenumber = request.form['Numero']
-     legalid = request.form['CIN']
-     address = request.form['Addresse']
-     retrievalrule = request.form['Recouvrement']
-     comments = request.form['Commentaires']
-     print firstname,lastname,phonenumber,legalid,address,retrievalrule,comments
-    try:
+    # if request.method=='POST':
+    firstname = request.form['Nom']
+    lastname = request.form['Prenom']
+    phonenumber = request.form['Numero']
+    legalid = request.form['CIN']
+    address = request.form['Addresse']
+    retrievalrule = request.form['Recouvrement']
+    comments = request.form['Commentaires']
+    print firstname,lastname,phonenumber,legalid,address,retrievalrule,comments
+    # try:
 
-      with cur:
-        fields = (firstname,lastname,phonenumber,legalid,address,retrievalrule,comments)
-        query = """INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) VALUES (%s,%s,%s,%s,%s,%s,%s);"""
-        cur.execute(query, fields)
-        db.commit()
-    finally:
-     db.close()
-     return json.dumps({"result":"Saved successfully."})
+    #   with cur:
+    fields = (firstname,lastname,phonenumber,legalid,address,retrievalrule,comments)
+    query = "INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) VALUES (%s,%s,%s,%s,%s,%s,%s);"
+    cur.execute(query, fields)
+    db.commit()
+    print "Registered"
+    # finally:
+    db.close()
+    return json.dumps({"result":"Saved successfully."})
     # return json.dumps({'status':'OK','worker':firstname});
     # return redirect('/workers/get_workers')
   
