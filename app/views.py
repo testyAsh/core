@@ -70,7 +70,7 @@ def addNewJob():
     print name
     # fields = name
     # query = "INSERT INTO Jobs (name) VALUES (%s)"
-    cur.execute("INSERT INTO Jobs (name) VALUES(%s)", name)
+    cur.execute("INSERT INTO Jobs (name) VALUES(%s)", [name])
     db.commit()
     print "added"
     db.close()
