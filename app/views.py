@@ -171,38 +171,37 @@ def getClients():
             "firstname": row[1],
             "lastname": row[2],
             "phonenumber": row[3],
-            "PreferredContact": row[4],
+            "preferredcontact": row[4],
             "address": row[5],
-            "comments": row[8],
+            "comments": row[6],
         }
         print d
         r.append(d)
     return jsonify(result=r)
     db.close()
 
-# @app.route('/addWorker')
-# def addWorker():
-#     return render_template('addworker.html')
+@app.route('/addClient')
+def addClient():
+    return render_template('addclient.html')
 
 
-# @app.route('/addNewWorker', methods=['POST', 'GET'])
-# def addNewworker():
-#     db, cur = connectDb()
-#     firstname = request.form['Nom']
-#     lastname = request.form['Prenom']
-#     phonenumber = request.form['Numero']
-#     legalid = request.form['CIN']
-#     address = request.form['Addresse']
-#     retrievalrule = request.form['Recouvrement']
-#     comments = request.form['Commentaires']
-#     print firstname,lastname,phonenumber,legalid,address,retrievalrule,comments
-#     fields = (firstname,lastname,phonenumber,legalid,address,retrievalrule,comments)
-#     query = "INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) VALUES (%s,%s,%s,%s,%s,%s,%s)"
-#     cur.execute(query, fields)
-#     db.commit()
-#     print "Registered"
-#     db.close()
-#     return json.dumps({"result":"Saved successfully."})
+@app.route('/addNewClient', methods=['POST', 'GET'])
+def addNewClient():
+    db, cur = connectDb()
+    firstname = request.form['Nom']
+    lastname = request.form['Prenom']
+    phonenumber = request.form['Numero']
+    preferredcontact = request.form['ContactVia']
+    address = request.form['Addresse']
+    comments = request.form['Commentaires']
+    print firstname,lastname,phonenumber,preferredcontact,address,comments
+    fields = (firstname,lastname,phonenumber,preferredcontact,address,comments)
+    query = "INSERT INTO Clients (FirstName,LastName,PhoneNumber,PreferredContact,Address,Comments) VALUES (%s,%s,%s,%s,%s,%s)"
+    cur.execute(query, fields)
+    db.commit()
+    print "Registered"
+    db.close()
+    return json.dumps({"result":"Saved successfully."})
  
 
 # @app.route('/workerJobs')
