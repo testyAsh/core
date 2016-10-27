@@ -1,12 +1,6 @@
 $(function() {
     $('button').click(function() {
         var name = $('#txtNom').val();
-        var lastname = $('#txtPrenom').val();
-        var phonenumber = $('#txtNumero').val();
-        var legalid = $('#txtCIN').val();
-        var address = $('#txtAddresse').val();
-        var retrievalrule = $('#txtRecouvrement').val();
-        var comments = $('#txtCommentaires').val();
         $.ajax({
             url: '/addNewJob',
             data: $('form').serialize(),

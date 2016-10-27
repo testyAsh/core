@@ -58,6 +58,25 @@ def getJobs():
     db.close()
 
 
+@app.route('/addjob')
+def addjob():
+    return render_template('addjob.html')
+
+
+@app.route('/addNewJob', methods=['POST', 'GET'])
+def addNewJob():
+    db, cur = connectDb()
+    name = request.form['Nom']
+    print name
+    # fields = name
+    # query = "INSERT INTO Jobs (name) VALUES (%s)"
+    cur.execute("INSERT INTO Jobs (name) VALUES(%s)", name)
+    db.commit()
+    print "added"
+    db.close()
+    return json.dumps({"result":"Saved successfully."})
+
+
 @app.route('/workers')
 def workers():
     return render_template('workers.html',
