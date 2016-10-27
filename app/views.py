@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import render_template, jsonify, request, json
+from flask import render_template, jsonify, request, json, redirect, url_for
 from app import app, db
 import MySQLdb
 
@@ -188,8 +188,8 @@ def addClient():
 @app.route('/addNewClient', methods=['POST', 'GET'])
 def addNewClient():
     db, cur = connectDb()
-    firstname = request.form['Nom']
-    lastname = request.form['Prenom']
+    lastname = request.form['Nom']
+    firstname = request.form['Prenom']
     phonenumber = request.form['Numero']
     preferredcontact = request.form['ContactVia']
     address = request.form['Addresse']
@@ -202,6 +202,30 @@ def addNewClient():
     print "Registered"
     db.close()
     return json.dumps({"result":"Saved successfully."})
+
+
+@app.route('/Findclient')
+def Findclient():
+    return render_template('findclient.html')
+
+
+@app.route('/Findclientrecord', methods=['POST', 'GET'])
+def Findclientrecord():
+    db, cur = connectDb()
+    lastname = request.form['Nom']
+    firstname = request.form['Prenom']
+    print firstname,lastname
+    cur.execute("SELECT FirstName, COUNT(*) FROM Clients WHERE FirstName = %s AND LastName = %s GROUP BY FirstName",(firstname,lastname))
+# gets the number of rows affected by the command executed
+    row_count = cur.rowcount
+    print("number of affected rows: {}".format(row_count))
+    if row_count == 0:
+        print "nope"
+        return redirect(url_for('addClient'))
+    else: 
+    	return json.dumps({"result":"It Does Exist."})
+       
+
  
 
 # @app.route('/workerJobs')

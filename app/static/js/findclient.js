@@ -1,13 +1,9 @@
 $(function() {
     $('button').click(function() {
-        var lastname = $('#txtNom').val();
-        var firstname = $('#txtPrenom').val();
-        var phonenumber = $('#txtNumero').val();
-        var preferredcontact = $('#txtContactVia').val();
-        var address = $('#txtAddresse').val();
-        var comments = $('#txtCommentaires').val();
+        var firstname = $('#txtNom').val();
+        var lastname = $('#txtPrenom').val();
         $.ajax({
-            url: '/addNewClient',
+            url: '/Findclientrecord',
             data: $('form').serialize(),
             type: 'POST',
             success: function(response) {
