@@ -147,6 +147,62 @@ def addNewworker():
     print "Registered"
     db.close()
     return json.dumps({"result":"Saved successfully."})
+
+
+@app.route('/clients')
+def clients():
+    return render_template('clients.html',
+                           title='Home')
+
+
+@app.route('/clients/get_clients')
+def getClients():
+    # u = models.Worker.query.all()
+    # json_list = [i.serialize for i in u]
+    # return jsonify(json_list)
+    db, cur = connectDb()
+    cur.execute(
+        "SELECT UID,FirstName,LastName,PhoneNumber,PreferredContact,Address,Comments FROM Clients")
+    rows = cur.fetchall()
+    r = []
+    for row in rows:
+        d = {
+            "uid": row[0],
+            "firstname": row[1],
+            "lastname": row[2],
+            "phonenumber": row[3],
+            "PreferredContact": row[4],
+            "address": row[5],
+            "comments": row[8],
+        }
+        print d
+        r.append(d)
+    return jsonify(result=r)
+    db.close()
+
+# @app.route('/addWorker')
+# def addWorker():
+#     return render_template('addworker.html')
+
+
+# @app.route('/addNewWorker', methods=['POST', 'GET'])
+# def addNewworker():
+#     db, cur = connectDb()
+#     firstname = request.form['Nom']
+#     lastname = request.form['Prenom']
+#     phonenumber = request.form['Numero']
+#     legalid = request.form['CIN']
+#     address = request.form['Addresse']
+#     retrievalrule = request.form['Recouvrement']
+#     comments = request.form['Commentaires']
+#     print firstname,lastname,phonenumber,legalid,address,retrievalrule,comments
+#     fields = (firstname,lastname,phonenumber,legalid,address,retrievalrule,comments)
+#     query = "INSERT INTO Workers (FirstName,LastName,PhoneNumber,LegalID,Address,RetrievalRule,Comments) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+#     cur.execute(query, fields)
+#     db.commit()
+#     print "Registered"
+#     db.close()
+#     return json.dumps({"result":"Saved successfully."})
  
 
 # @app.route('/workerJobs')
