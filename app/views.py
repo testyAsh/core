@@ -212,8 +212,8 @@ def Findclient():
 @app.route('/Findclientrecord', methods=['POST', 'GET'])
 def Findclientrecord():
     db, cur = connectDb()
-    lastname = request.args.get('Nom')
-    firstname = request.args.get('Prenom')
+    lastname = request.form['Nom']
+    firstname = request.form['Prenom']
     print firstname,lastname
     cur.execute("SELECT FirstName, LastName, COUNT(*) FROM Clients WHERE (FirstName = %s OR LastName = %s OR FirstName = %s OR LastName = %s) GROUP BY Firstname",(firstname,firstname,lastname,lastname))
 # gets the number of rows affected by the command executed
