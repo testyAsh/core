@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import render_template, jsonify, request, json, redirect, url_for
+from flask import Flask, render_template, jsonify, request, json, redirect, url_for
 from app import app, db
 import MySQLdb
 
@@ -215,15 +215,28 @@ def Findclientrecord():
     lastname = request.form['Nom']
     firstname = request.form['Prenom']
     print firstname,lastname
-    cur.execute("SELECT FirstName, COUNT(*) FROM Clients WHERE FirstName = %s AND LastName = %s GROUP BY FirstName",(firstname,lastname))
+    cur.execute("SELECT FirstName, LastName, COUNT(*) FROM Clients WHERE (FirstName = %s OR LastName = %s OR FirstName = %s OR LastName = %s) GROUP BY Firstname",(firstname,firstname,lastname,lastname))
 # gets the number of rows affected by the command executed
     row_count = cur.rowcount
     print("number of affected rows: {}".format(row_count))
-    if row_count == 0:
-        print "nope"
-        return redirect(url_for('addClient'))
-    else: 
-    	return json.dumps({"result":"It Does Exist."})
+    db, cur = connectDb()
+    cur.execute("SELECT UID,FirstName,LastName,PhoneNumber,PreferredContact,Address,Comments FROM Clients WHERE (FirstName = %s OR LastName = %s OR FirstName = %s OR LastName = %s)",(firstname,firstname,lastname,lastname))
+    rows = cur.fetchall()
+    r = []
+    for row in rows:
+        d = {
+            "uid": row[0],
+            "firstname": row[1],
+            "lastname": row[2],
+            }
+        print d
+        r.append(d)
+    return jsonify(result = r)
+    print "nope"
+    # return jsonify(result = row_count)
+    # return str(row_count)
+    # else: 
+    # 	return json.dumps({"result":"It Does Exist."})
        
 
  

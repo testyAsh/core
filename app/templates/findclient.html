@@ -16,11 +16,6 @@
 
     <!-- Custom CSS -->
     <link href="../static/css/simple-sidebar.css" rel="stylesheet">
-    <!-- jQuery -->
-    <script src="../static/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../static/js/bootstrap.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,7 +26,7 @@
 
 </head>
 
-<body>
+<body onload='hideBoth()'>
 
     <div id="wrapper">
 
@@ -79,6 +74,15 @@
             <button class="btn btn-lg btn-primary btn-block" type="button">Chercher </button>
 
         </form>
+          <div id="cont1" style="visibility: visible;">
+        <input type="button" onclick="Afficher Clients" value="hidefield2" id="boton1">
+        </div>
+
+        <div id="cont2" style="visibility: visible;">
+         <input type="button" onclick="Ajouter client" value="hidefield1" id="boton2">   
+        </div>
+
+
                 </div>
             </div>
         </div>
@@ -94,6 +98,7 @@
     <script src="../static/js/bootstrap.min.js"></script>
 
     <script src="../static/js/findclient.js"></script>
+    
 
     <!-- Menu Toggle Script -->
     <script>
