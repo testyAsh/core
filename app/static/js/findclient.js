@@ -19,11 +19,7 @@ function addnonexistingclients() {
                           })
             var b = JSON.stringify(data.result[0]);
 
-            if( a == b) {
-            console.log("data"); 
-            } else {
-            console.log("fooooooooooooooobaaaaaaaar");
-        }
+            return ( a == b);
             });
 }
 
@@ -50,27 +46,48 @@ $(function() {
     $('button').click(function() {
         var firstname = $('#txtNom').val();
         var lastname = $('#txtPrenom').val();
-        var x = 1;
-        $.ajax({
-            url: '/Findclientrecord',
-            data: $('form').serialize(),
-            type: 'POST',
-            // success: function(response) {
-            //     console.log(response);
-            // },
-            // error: function(error) {
-            //     console.log(error);
-            // }
-        });
-        // if(x == 1) {
-        //             document.getElementById("cont1").style.visibility="visible";
-        //             document.getElementById("cont2").style.visibility="hidden"; }
         var a = JSON.stringify({
                 "uid": null,
                 "firstname": null,
                 "lastname": null,
                           })
-        console.log(a);
+        var x = 1;
+
+ $.getJSON('/Findclientrecord', {
+          firstname,
+          lastname,
+        }, function(data) {
+          
+            var b = JSON.stringify(data.result[0]);
+            console.log("fooooooooobar");
+        });        
+        // $.ajax({
+        //     url: '/Findclientrecord',
+        //     data: $('form').serialize(),
+        //     type: 'POST',
+        //     // success: function(response) {
+        //     //     console.log(response);
+        //     // },
+        //     // error: function(error) {
+        //     //     console.log(error);
+        //     // }
+        // });
+          
+        // if(x == 1) {
+        //             document.getElementById("cont1").style.visibility="visible";
+        //             document.getElementById("cont2").style.visibility="hidden"; }
+        // $.getJSON('/Findclientrecord', {
+        //  }, function(data) {
+        //     // res = parseInt(data.result);
+        //     var a = JSON.stringify({
+        //         "uid": null,
+        //         "firstname": null,
+        //         "lastname": null,
+        //                   })
+        //     var b = JSON.stringify(data.result[0]);
+        //     console.log("fooooooooobar");
+        //     // return ( a == b);
+        //     });
          console.log("foobar");
 
     });
