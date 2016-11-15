@@ -228,6 +228,10 @@ def Findclientrecord():
             "uid": row[0],
             "firstname": row[1],
             "lastname": row[2],
+            "phonenumber": row[3],
+            "preferredcontact": row[4],
+            "address": row[5],
+            "comments": row[6],
             }
         print d
         r.append(d)

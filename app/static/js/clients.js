@@ -18,7 +18,7 @@ function fetchclients() {
                 client[5]=data.result[i].address;
                 client[6]=data.result[i].comments;
                 clients[i]=client;
-                console.log(client)
+                console.log(client);
             }
             clients.sort();
             createclientList(clients);

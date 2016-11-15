@@ -74,14 +74,30 @@
             <button class="btn btn-lg btn-primary btn-block" type="button">Chercher </button>
 
         </form>
-          <div id="cont1" style="visibility: visible;">
-        <input type="button" onclick="Afficher Clients" value="Afficher Clients" id="boton1">
-        </div>
+          <!-- <div id="cont1" style="visibility: visible;">
+        <input type="button" onclick="Afficher Clients" value="Afficher Clients" id="button1">
+        </div> -->
 
         <div id="cont2" style="visibility: visible;">
-         <input type="button" onclick="Ajouter Client" value="Ajouter Client" id="boton2">   
+         <input type="button" onclick="Ajouter Client" value="Ajouter Client" id="button2">   
         </div>
-
+<div class="col-lg-12">
+                        <table id="tab" class="table table-hover table-striped table-bordered" style="visibility: hidden;"">
+                            <thead>
+                              <tr>
+                                <th>Référence</th>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Téléphone</th>
+                                <th>Contactvia</th>
+                                <th>Adresse</th>
+                                <th>Commentaires</th>
+                              </tr>
+                            </thead>
+                            <tbody id="clientList">
+                            </tbody>
+                          </table>
+                    </div>
 
                 </div>
             </div>
