@@ -129,3 +129,6 @@ function createclientList(){
     }
     document.getElementById("clientList").innerHTML = html;
 }
+document.getElementById("cont2").onclick = function () {
+        location.href = '/addClient';
+    };
