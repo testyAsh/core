@@ -8,7 +8,7 @@ $(function() {
         var retrievalrule = $('#txtRecouvrement').val();
         var comments = $('#txtCommentaires').val();
         $.ajax({
-            url: '/addNewJob',
+            url: '/addNewWorker',
             data: $('form').serialize(),
             type: 'POST',
             success: function(response) {
