@@ -105,7 +105,9 @@ function createclientList(){
     {
         html += '<tr>';
         html += '<td>';
+        html += '<a href="Findclient">'
         html += clients[i][0];
+        html += '</a>'
         html += '</td>';
         html += '<td>';
         html += clients[i][1];

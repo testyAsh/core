@@ -22,19 +22,6 @@ def index():
                            title='Home')
 
 
-# @app.route('/orders')
-# def orders():
-#     return render_template('orders.html',
-#                            title='Home')
-
-
-# @app.route('/orders/get_orders')
-# def getOrders():
-#     u = models.Order.query.all()
-#     json_list=[unicode(i.serialize) for i in u]
-#     return jsonify(json_list)
-
-
 @app.route('/jobs')
 def jobs():
     return render_template('jobs.html',
@@ -237,23 +224,36 @@ def Findclientrecord():
         r.append(d)
     return jsonify(result = r)
     print "nope"
-    # return jsonify(result = row_count)
-    # return str(row_count)
-    # else: 
-    # 	return json.dumps({"result":"It Does Exist."})
-       
-
- 
-
-# @app.route('/workerJobs')
-# def workersJobs():
-#     return render_template('workerJobs.html',
-#                            title='Home')
 
 
-# @app.route('/workerJobs/get_workerJobs')
-# def getWorkersJobs():
-#     u = models.Job.query.get(19)
-#     workerjob = u.WorkerJobs.all()
-#     json_list = [i.serialize for i in workerjob]
-#     return jsonify(json_list)
+@app.route('/orders')
+def orders():
+    return render_template('bookings.html',
+                           title='Home')
+
+
+@app.route('/orders/get_orders')
+def getOrders():
+    db, cur = connectDb()
+    cur.execute(
+        "SELECT UID,State,ClientID,WorkerID,Contactthrough,InsertionDate,ExecutionDate,ClientPaidFees,ReportedPaidFees,RetrievalReceived FROM Bookings")
+    rows = cur.fetchall()
+    r = []
+    for row in rows:
+        d = {
+            "uid": row[0],
+            "state": row[1],
+            "clientid": row[2],
+            "workerid": row[3],
+            "contactthrough": row[4],
+            "insertiondate": row[5],
+            "executiondate": row[6],
+            "clientpaidfees": row[4],
+            "reportedpaidfees": row[5],
+            "retrievalreceived": row[6],
+        }
+        print d
+        r.append(d)
+    return jsonify(result=r)
+    db.close()
+   
