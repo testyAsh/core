@@ -64,7 +64,6 @@ function createorderList(){
         html += '<td>';
         html += orders[i][9];
         html += '</td>';
-        html += '<td>';
     }
     document.getElementById("orderList").innerHTML = html;
 }

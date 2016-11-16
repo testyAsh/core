@@ -31,7 +31,6 @@ function createjobList(){
         html += '<td>';
         html += jobs[i][1];
         html += '</td>';
-        html += '</tr>';
     }
     document.getElementById("jobList").innerHTML = html;
 }

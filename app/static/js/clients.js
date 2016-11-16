@@ -52,7 +52,7 @@ function createclientList(){
         html += '<td>';
         html += clients[i][6];
         html += '</td>';
-        html += '<td>';
+        // html += '<td>';
     }
     document.getElementById("clientList").innerHTML = html;
 }

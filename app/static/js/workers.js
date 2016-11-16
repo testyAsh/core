@@ -60,7 +60,6 @@ function createworkerList(){
         html += '<td>';
         html += workers[i][8];
         html += '</td>';
-        html += '<td>';
     }
     document.getElementById("workerList").innerHTML = html;
 }
