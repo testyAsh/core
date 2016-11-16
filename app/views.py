@@ -30,13 +30,9 @@ def jobs():
 
 @app.route('/jobs/get_jobs')
 def getJobs():
-    # u = models.Job.query.all()
-    # return jsonify(u=models.Job.serialize_list(u))
-    # # return jsonify(json_list)
     db, cur = connectDb()
     cur.execute("SELECT UID,Name FROM Jobs")
     rows = cur.fetchall()
-    # rows = models.Job.query.all()
     r = []
     for row in rows:
         d = {"uid": row[0], "name": row[1]}
@@ -55,8 +51,6 @@ def addNewJob():
     db, cur = connectDb()
     name = request.form['Nom']
     print name
-    # fields = name
-    # query = "INSERT INTO Jobs (name) VALUES (%s)"
     cur.execute("INSERT INTO Jobs (name) VALUES(%s)", [name])
     db.commit()
     print "added"
@@ -72,9 +66,6 @@ def workers():
 
 @app.route('/workers/get_workers')
 def getWorkers():
-    # u = models.Worker.query.all()
-    # json_list = [i.serialize for i in u]
-    # return jsonify(json_list)
     db, cur = connectDb()
     cur.execute(
         "SELECT UID,FirstName,LastName,PhoneNumber,LegalID,Address,Job,RetrievalRule,Comments FROM Workers")
@@ -144,9 +135,6 @@ def clients():
 
 @app.route('/clients/get_clients')
 def getClients():
-    # u = models.Worker.query.all()
-    # json_list = [i.serialize for i in u]
-    # return jsonify(json_list)
     db, cur = connectDb()
     cur.execute(
         "SELECT UID,FirstName,LastName,PhoneNumber,PreferredContact,Address,Comments FROM Clients")
@@ -203,7 +191,6 @@ def Findclientrecord():
     firstname = request.form['Prenom']
     print firstname,lastname
     cur.execute("SELECT FirstName, LastName, COUNT(*) FROM Clients WHERE (FirstName = %s OR LastName = %s OR FirstName = %s OR LastName = %s) GROUP BY Firstname",(firstname,firstname,lastname,lastname))
-# gets the number of rows affected by the command executed
     row_count = cur.rowcount
     print("number of affected rows: {}".format(row_count))
     db, cur = connectDb()
@@ -256,4 +243,8 @@ def getOrders():
         r.append(d)
     return jsonify(result=r)
     db.close()
-   
+
+  
+@app.route('/CreateOrder')
+def CreateOrder():
+    return render_template('pendingorder.html')
