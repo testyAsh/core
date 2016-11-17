@@ -30,7 +30,8 @@ def getClients():
         print d
         r.append(d)
     db.close()
-    return r    
+    return r   
+     
 
 def addNewClient(request):
     db, cur = connectDb()

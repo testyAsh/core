@@ -4,6 +4,7 @@ from app import app, db
 import MySQLdb
 import worker_logic as wl
 import client_logic as cl
+import job_logic as jl
 
 
 def connectDb():
@@ -19,7 +20,7 @@ def connectDb():
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('bookings.html',
+    return render_template('home.html',
                            title='Home')
 
 
@@ -31,14 +32,8 @@ def jobs():
 
 @app.route('/jobs/get_jobs')
 def getJobs():
-    db, cur = connectDb()
-    cur.execute("SELECT UID,Name FROM Jobs")
-    rows = cur.fetchall()
-    r = []
-    for row in rows:
-        d = {"uid": row[0], "name": row[1]}
-        r.append(d)
-    return jsonify(result=r)
+    result = jl.getJobs()
+    return jsonify(result=result)
     db.close()
 
 
@@ -49,13 +44,7 @@ def addjob():
 
 @app.route('/addNewJob', methods=['POST', 'GET'])
 def addNewJob():
-    db, cur = connectDb()
-    name = request.form['Nom']
-    print name
-    cur.execute("INSERT INTO Jobs (name) VALUES(%s)", [name])
-    db.commit()
-    print "added"
-    db.close()
+    jl.addNewJob(request)
     return json.dumps({"result": "Saved successfully."})
 
 
