@@ -43,7 +43,8 @@ $(function() {
              }
              else {console.log('rien');
              // document.getElementById("cont1").style.visibility="hidden";
-             document.getElementById("cont2").style.visibility="visible"; }
+             document.getElementById("cont2").style.visibility="visible"; 
+             document.getElementById("tab").style.visibility="hidden";}
 
             
             },
@@ -87,6 +88,8 @@ function createclientList(){
         html += '<td>';
         html += clients[i][6];
         html += '</td>';
+        html += '<td>';
+        html += '<a href="/CreateOrder">Lancer une commande</a>'
     }
     document.getElementById("clientList").innerHTML = html;
 }

@@ -60,9 +60,72 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Menu</a>
-                        <h1>Commande n°</h1> 
+                        <h1>Nouvelle commande</h1> 
                     </div>
-                    
+
+                    <form action="/addjob" method="post">
+                    <label for="select" class="col-lg-6 control-label">Choisir type de service</label>
+                    <div class="col-lg-6">
+                    <select name="choix" multiple=""  id="choix" onChange="javascript:document.getElementById('texte').value = this.value;">
+
+                                                <option>Alarmes</option>
+                                                <option>Aluminium</option>
+                                                <option>Bâtiment</option>
+                                                <option>Camera</option>
+                                                <option>Chaudière</option>
+                                                <option>Chauffage</option>
+                                                <option>Climatisation</option>
+                                                <option>Couture</option>
+                                                <option>Décoration</option>
+                                                <option>Electricité</option>
+                                                <option>Forgeron</option>
+                                                <option>Informatique</option>
+                                                <option>Jardinier</option>
+                                                <option>Kiné</option>
+                                                <option>Lustrage M</option>
+                                                <option>Ménage</option>
+                                                <option>Menuiserie Alu</option>
+                                                <option>Menuiserie Bois</option>
+                                                <option>Parabole</option>
+                                                <option>Peinture</option>
+                                                <option>Piscine</option>
+                                                <option>Plastique</option>
+                                                <option>Plexiglass</option>
+                                                <option>Plomberie</option>
+                                                <option>Pompe à Chaleur</option>
+                                                <option>Réparation éléctroménager</option>
+                                                <option>Rideaux</option>
+                                                <option>Serrurier</option>
+                                                <option>Stores</option>
+                                                <option>Tout</option>
+                                                <option>Ventilateur</option>
+                                                <option>Verre</option>
+                                                
+                                            </select>
+</div>
+                                            <input type="text" name="texte" value="" id="texte" style="visibility: hidden;"/>
+                                        <button type="button" class="btn btn-primary">selectionner</button>
+                       </form> 
+
+
+<div class="col-lg-12">
+                        <table id="tab" class="table table-hover table-striped table-bordered" style="visibility: hidden;"">
+                            <thead>
+                              <tr>
+                                <th>Référence</th>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Téléphone</th>
+                                <th>CIN</th>
+                                <th>Adresse</th>
+                                <th>Taux de recouvrement</th>
+                                <th>Commentaires</th>
+                              </tr>
+                            </thead>
+                            <tbody id="workerList">
+                            </tbody>
+                          </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,7 +140,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../static/js/bootstrap.min.js"></script>
 
-    <script src="../static/js/bookings.js"></script>
+    <script src="../static/js/createorder.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
