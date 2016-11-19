@@ -62,9 +62,13 @@
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Menu</a>
                         <h1>Nouvelle commande</h1> 
                     </div>
+                    <div class="col-lg-12">
 
-                    <form action="/addjob" method="post">
+                    <form action="/addNewOrder" method="post">
+                    <div class="col-lg-6">
+
                     <label for="select" class="col-lg-6 control-label">Choisir type de service</label>
+
                     <div class="col-lg-6">
                     <select name="choix" multiple=""  id="choix" onChange="javascript:document.getElementById('texte').value = this.value;">
 
@@ -102,11 +106,14 @@
                                                 <option>Verre</option>
                                                 
                                             </select>
-</div>
+                                            </div>
                                             <input type="text" name="texte" value="" id="texte" style="visibility: hidden;"/>
-                                        <button type="button" class="btn btn-primary">selectionner</button>
-                       </form> 
+                             <div class="col-lg-6">
 
+                                        <button type="button" class="btn btn-primary">selectionner</button>
+                                        </div>
+                       </form> 
+                </div>
 
 <div class="col-lg-12">
                         <table id="tab" class="table table-hover table-striped table-bordered" style="visibility: hidden;"">

@@ -26,7 +26,7 @@
 
 </head>
 
-<body onload='hideBoth()'>
+<!-- <body onload='hideBoth()'> -->
 
     <div id="wrapper">
 
@@ -94,7 +94,7 @@
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Menu</a>
                        <!--  <h1>Vérifier Client</h1> -->
                     </div>
-
+<div class="col-lg-12">
                  <form class="form-horizontal" action="/Findclient" method="post">
                                 <fieldset>
                                     <legend>Chercher client</legend>
@@ -133,10 +133,10 @@
         </div> -->
 
         
-         <input id="cont2" type="button" class="btn btn-primary" onclick="Ajouter Client" value="Ajouter Client" style="visibility: visible;">   
+         <input id="cont2" type="button" class="btn btn-primary" onclick="Ajouter Client" value="Ajouter Client" style="visibility: hidden;">   
     
-<div class="col-lg-12">
-                        <table id="tab" class="table table-hover table-striped table-bordered" style="visibility: hidden;"">
+
+                        <table id="tab" class="table table-hover table-striped table-bordered" style="visibility: hidden;">
                             <thead>
                               <tr>
                                 <th>Référence</th>
@@ -146,14 +146,25 @@
                                 <th>Contactvia</th>
                                 <th>Adresse</th>
                                 <th>Commentaires</th>
-                              </tr>
+                                </tr>
                             </thead>
                             <tbody id="clientList">
                             </tbody>
                           </table>
-                    </div>
 
+<form method="post" action="/CreateOrder">
+        <p><input type="text" name="idclient" value="" id="idclient" style="visibility: visible;"/></p>
+        <p><button id = "btn" type="button" class="btn btn-primary btn-xs" style="visibility: hidden;">Lancer une commande</button></p>
+        <!-- <p><button type="submit">Send</button></p> -->
+    </form>
+
+                          
+                                                    
+
+                    </div>
+                           
                 </div>
+                
             </div>
         </div>
         <!-- /#page-content-wrapper -->

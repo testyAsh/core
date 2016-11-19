@@ -1,8 +1,8 @@
 
 
-function hideBoth()  
-{     document.getElementById("cont2").style.visibility="hidden" ;   
-}
+// function hideBoth(){
+//      document.getElementById("cont2").style.visibility="hidden" ;   
+// }
 
 
 
@@ -22,6 +22,7 @@ $(function() {
        
              document.getElementById("cont2").style.visibility="hidden"; 
              document.getElementById("tab").style.visibility="visible"; 
+             document.getElementById("btn").style.visibility="visible"
              var i;
             clients = new Array();
             for (i=0;i<response.result.length;i++)
@@ -34,17 +35,19 @@ $(function() {
                 client[4]=response.result[i].preferredcontact;
                 client[5]=response.result[i].address;
                 client[6]=response.result[i].comments;
+
                 clients[i]=client;
                 console.log(client);
             }
             clients.sort();
             createclientList(clients);
-                
-             }
+            }
+
              else {console.log('rien');
              // document.getElementById("cont1").style.visibility="hidden";
              document.getElementById("cont2").style.visibility="visible"; 
-             document.getElementById("tab").style.visibility="hidden";}
+             document.getElementById("tab").style.visibility="hidden";
+             document.getElementById("btn").style.visibility="hidden";}
 
             
             },
@@ -66,9 +69,7 @@ function createclientList(){
     {
         html += '<tr>';
         html += '<td>';
-        html += '<a href="/CreateOrder">'
         html += clients[i][0];
-        html += '</a>'
         html += '</td>';
         html += '<td>';
         html += clients[i][1];
@@ -87,12 +88,80 @@ function createclientList(){
         html += '</td>';
         html += '<td>';
         html += clients[i][6];
-        html += '</td>';
+        html += '</td>';   
         html += '<td>';
-        html += '<a href="/CreateOrder">Lancer une commande</a>'
+        html += '<input type="radio" name="optionsRadios"';
+        html += 'id="optionsRadios';
+        html += i;
+        html += '"';
+        html += 'value="'
+        html += clients[i][0];
+        html += '">';
+        html += '</td>';                                           
+                                               
+                                            
+        // html += '<a href="/CreateOrder">Lancer une commande</a>'
     }
     document.getElementById("clientList").innerHTML = html;
 }
+
+
 document.getElementById("cont2").onclick = function () {
         location.href = '/addClient';
     };
+
+
+
+$(function() {
+    $('btn').click(function() {
+
+            var rad = $('input[name=optionsRadios]:checked').val();
+    document.getElementById('idclient').value = rad;
+
+          $.ajax({
+            url: '/CreateOrder',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(response) {
+              console.log(response);  
+             }
+             
+            // error: function(error) {
+            //     console.log(error);
+            // }
+        });
+
+
+    });
+});
+
+
+
+// document.getElementById("btn").onclick = function () {
+
+//     var rad = $('input[name=optionsRadios]:checked').val();
+//     document.getElementById('texte').value = rad;
+
+//           $.ajax({
+//             url: '/CreateOrder',
+//             data: $('form').serialize(),
+//             type: 'POST',
+//             success: function(response) {
+//               console.log(response);  
+//              }
+             
+//             error: function(error) {
+//                 console.log(error);
+//             }
+//         });
+       
+//          console.log("foobar");
+
+//     };
+
+
+     // if (rad) {
+     //    window.location = '/CreateOrder?username=' + rad;
+    // }        
+        // location.href = '/CreateOrder';
+    
