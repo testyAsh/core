@@ -64,12 +64,33 @@
                     </div>
                     <div class="col-lg-12">
 
+
+                    <form action="/FindclientInfos" method="post">
+                    <input type="text" name="idclient" value="" id="idclient" style="visibility: hidden;"/>
+                    <button type="button0" class="btn btn-primary">afficher infos clients</button>
+                    </form>
+                    <div class="col-lg-12">
+                        <table id="tab1" class="table table-hover table-striped table-bordered" style="visibility: visible;"">
+                            <thead>
+                              <tr>
+                                <th>Référence</th>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Téléphone</th>
+                                <th>Adresse</th>
+                                <th>Commentaires</th>
+                              </tr>
+                            </thead>
+                            <tbody id="clientList">
+                            </tbody>
+                          </table>
+                    </div>
+
                     <form action="/addNewOrder" method="post">
                     
                     <div class="col-lg-6">
-                    
-                     <legend class ="col-lg-6" id = "idclient" value="">Client n°</legend> 
-                    
+
+
                     <label for="select" class="col-lg-6 control-label">Choisir type de service</label>
 
                     <div class="col-lg-6">

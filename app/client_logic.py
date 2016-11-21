@@ -81,3 +81,24 @@ def Findclientrecord(request):
         print d
         r.append(d)
     return r
+
+
+def FindclientInfos(request):
+    db, cur = connectDb()
+    idclient = request.form['idclient']
+    print idclient
+    cur.execute("SELECT UID,FirstName,LastName,PhoneNumber,PreferredContact,Address,Comments FROM Clients WHERE (UID = %s)",(idclient,))
+    rows = cur.fetchall()
+    r = []
+    for row in rows:
+        d = {
+            "uid": row[0],
+            "firstname": row[1],
+            "lastname": row[2],
+            "phonenumber": row[3],
+            "address": row[4],
+            "comments": row[5],
+        }
+        print d
+        r.append(d)
+    return r

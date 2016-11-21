@@ -107,6 +107,12 @@ def Findclientrecord():
 	return jsonify(result=result)
     
 
+@app.route('/FindclientInfos', methods=['POST', 'GET'])
+def FindclientInfos():
+	result = cl.FindclientInfos(request)
+	return jsonify(result=result)
+	    
+
 @app.route('/orders')
 def orders():
     return render_template('bookings.html',
@@ -147,8 +153,6 @@ def CreateOrder():
 @app.route('/addNewOrder', methods=['POST', 'GET'])
 def addNewOrder():
     db, cur = connectDb()
-    # var = request.form['idclient']
-    # print var
     name = request.form['texte']
     print name
     cur.execute("SELECT UID,name FROM Jobs WHERE name = %s", (name,))

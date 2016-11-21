@@ -20,6 +20,63 @@
 	// Appel de la fonction et création du tableau des paramètres
 	// var urlParam = TJSExtraireParam();
 
+$(function() {
+    $('button1').click(function() {
+var urlParam = TJSExtraireParam();
+document.getElementById('idclient').value = urlParam["param"];
+$.ajax({
+            url: '/FindclientInfos',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+                console.log('fooooooooooo');
+                     
+                if (response.result.length != 0) {
+        
+             document.getElementById("tab1").style.visibility="visible"; 
+
+             var i;
+            clients = new Array();
+            for (i=0;i<response.result.length;i++)
+            {
+                var client = new Array();
+                client[0]=response.result[i].uid;
+                client[1]=response.result[i].firstname;
+                client[2]=response.result[i].lastname;
+                client[3]=response.result[i].phonenumber;
+                client[4]=response.result[i].address;
+                client[5]=response.result[i].comments;
+                clients[i]=client;
+                console.log(client);
+            }
+            clients.sort();
+            createclientList(clients);
+                
+             }
+                // successAlert = '<div class="alert alert-dismissable alert-success">';
+                // successAlert += '<button type="button" class="close" data-dismiss="alert">×</button>';
+                // successAlert += 'le nouvel ouvrier a été ajouté avec succès';
+                // successAlert += '</div>';
+                // document.getElementById("alert-div").innerHTML = successAlert;
+            },
+            error: function(error) {
+                console.log(error);
+                // successAlert = '<div class="alert alert-dismissable alert-danger">';
+                // successAlert += '<button type="button" class="close" data-dismiss="alert">×</button>';
+                // successAlert += "l'ajout du nouvel ouvrier a échoué! Veuillez réessayer.";
+                // successAlert += '</div>';
+                // document.getElementById("alert-div").innerHTML = successAlert;
+            }
+        });
+
+});
+
+});
+
+
+
+
 
 
 
@@ -36,13 +93,11 @@ $.ajax({
             type: 'POST',
             success: function(response) {
                 console.log(response);
-                     var urlParam = TJSExtraireParam();
 
-	// Récupération des paramètres
-	document.getElementById('idclient').value = urlParam["param"];
+                     
                 if (response.result.length != 0) {
         
-             document.getElementById("tab").style.visibility="visible"; 
+             //document.getElementById("tab").style.visibility="visible"; 
 
              var i;
             workers = new Array();
@@ -120,3 +175,32 @@ function createworkerList(){
     }
     document.getElementById("workerList").innerHTML = html;
 }
+
+function createclientList(){
+    var i;
+    var html = '';
+    for (i=0;i<clients.length;i++)
+    {
+        html += '<tr>';
+        html += '<td>';
+        html += clients[i][0];
+        html += '</td>';
+        html += '<td>';
+        html += clients[i][1];
+        html += '</td>';
+        html += '<td>';
+        html += clients[i][2];
+        html += '</td>';
+        html += '<td>';
+        html += clients[i][3];
+        html += '</td>';
+        html += '<td>';
+        html += clients[i][4];
+        html += '</td>';
+        html += '<td>';
+        html += clients[i][5];
+        html += '</td>';                                          
+                                               
+      }
+      document.getElementById("clientList").innerHTML = html;
+  }
