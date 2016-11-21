@@ -1,18 +1,49 @@
+
+// D'autres scripts et des tutoriaux sur www.ToutJavascript.com
+// Script réalisé par Tout JavaScript.com
+
+	// Fonction d'extraction des paramètres
+	function TJSExtraireParam() {
+		url = window.location.href;
+		var exp=new RegExp("[&?]+","g");
+		var exp2=new RegExp("[=]+","g");
+		var tabNom=url.split(exp);
+		var	tabParam=new Array();
+		if (tabNom!=null) {
+			for (var i=1;i<tabNom.length;i++){
+				var tabTemp=tabNom[i].split(exp2);
+				tabParam[tabTemp[0]]=tabTemp[1];
+			}
+		}
+		return tabParam;
+	}
+	// Appel de la fonction et création du tableau des paramètres
+	// var urlParam = TJSExtraireParam();
+
+
+
+
 $(function() {
     $('button').click(function() {
 
 // var selectElmt = document.getElementById("choix");
 // var valeurselectionnee = selectElmt.options[selectElmt.selectedIndex].value;
 // var textselectionne = selectElmt.options[selectElmt.selectedIndex].text;
+
 $.ajax({
             url: '/addNewOrder',
             data: $('form').serialize(),
             type: 'POST',
             success: function(response) {
                 console.log(response);
+                     var urlParam = TJSExtraireParam();
+
+	// Récupération des paramètres
+	document.getElementById('idclient').value = urlParam["param"];
                 if (response.result.length != 0) {
         
              document.getElementById("tab").style.visibility="visible"; 
+
              var i;
             workers = new Array();
             for (i=0;i<response.result.length;i++)

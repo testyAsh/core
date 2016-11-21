@@ -147,8 +147,8 @@ def CreateOrder():
 @app.route('/addNewOrder', methods=['POST', 'GET'])
 def addNewOrder():
     db, cur = connectDb()
-    var = request.form['idclient']
-    print var
+    # var = request.form['idclient']
+    # print var
     name = request.form['texte']
     print name
     cur.execute("SELECT UID,name FROM Jobs WHERE name = %s", (name,))

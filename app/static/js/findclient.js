@@ -112,56 +112,25 @@ document.getElementById("cont2").onclick = function () {
 
 
 
-$(function() {
-    $('btn').click(function() {
-
-            var rad = $('input[name=optionsRadios]:checked').val();
-    document.getElementById('idclient').value = rad;
-
-          $.ajax({
-            url: '/CreateOrder',
-            data: $('form').serialize(),
-            type: 'POST',
-            success: function(response) {
-              console.log(response);  
-             }
-             
-            // error: function(error) {
-            //     console.log(error);
-            // }
-        });
-
-
-    });
-});
 
 
 
-// document.getElementById("btn").onclick = function () {
 
-//     var rad = $('input[name=optionsRadios]:checked').val();
-//     document.getElementById('texte').value = rad;
+document.getElementById("btn").onclick = function () {
 
-//           $.ajax({
-//             url: '/CreateOrder',
-//             data: $('form').serialize(),
-//             type: 'POST',
-//             success: function(response) {
-//               console.log(response);  
-//              }
-             
-//             error: function(error) {
-//                 console.log(error);
-//             }
-//         });
+    var rad = $('input[name=optionsRadios]:checked').val();
+    document.getElementById('texte').value = rad;
+if (rad) {
+        window.location = '/CreateOrder?param=' + rad;
+    }       
        
-//          console.log("foobar");
+         console.log("foobar");
 
-//     };
+    };
 
 
-     // if (rad) {
-     //    window.location = '/CreateOrder?username=' + rad;
+    //  if (rad) {
+    //     window.location = '/CreateOrder?id=' + rad;
     // }        
-        // location.href = '/CreateOrder';
+
     
