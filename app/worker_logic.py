@@ -49,6 +49,35 @@ def getWorkers():
     return r
 
 
+def getWorkersSpecialised(serviceID):
+    db, cur = connectDb()
+    cur.execute("SELECT Workers.UID, Workers.Firstname, Workers.Lastname, "
+                "Workers.PhoneNumber, Workers.LegalID,Workers.Address, "
+                "Workers.RetrievalRule, Workers.Comments "
+                "FROM WorkersJobs "
+                "INNER JOIN Workers "
+                "ON Workers.UID = WorkersJobs.WorkerUID "
+                "INNER JOIN Jobs "
+                "ON Jobs.UID=WorkersJobs.JobUID "
+                "WHERE Jobs.UID=%s;" % (str(serviceID)))
+    rows = cur.fetchall()
+    r = []
+    for row in rows:
+        d = {
+            "uid": row[0],
+            "firstname": row[1],
+            "lastname": row[2],
+            "phonenumber": row[3],
+            "legalid": row[4],
+            "address": row[5],
+            "retrievalrule": row[6],
+            "comments": row[7],
+        }
+        r.append(d)
+    db.close()
+    return r
+
+
 def addNewWorker(request):
     db, cur = connectDb()
     firstname = request.form['Nom']

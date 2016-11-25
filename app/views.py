@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, jsonify, request, json, redirect, url_for
-from app import app, db
+from flask import render_template, jsonify, request, json, redirect, url_for, session
+from app import app
 import MySQLdb
 import worker_logic as wl
 import client_logic as cl
@@ -34,7 +34,6 @@ def jobs():
 def getJobs():
     result = jl.getJobs()
     return jsonify(result=result)
-    db.close()
 
 
 @app.route('/addjob')
@@ -58,7 +57,15 @@ def workers():
 def getWorkers():
     result = wl.getWorkers()
     return jsonify(result=result)
-    db.close()
+
+
+@app.route('/workers/get_workers_specialised')
+def getWorkersSpecialised():
+    if "ServiceId" in session:
+        result = wl.getWorkersSpecialised(session['ServiceId'])
+    else:
+        result = wl.getWorkers()
+    return jsonify(result=result)
 
 
 @app.route('/addWorker')
@@ -82,7 +89,6 @@ def clients():
 def getClients():
     result = cl.getClients()
     return jsonify(result=result)
-    db.close()
 
 
 @app.route('/addClient')
@@ -103,15 +109,15 @@ def Findclient():
 
 @app.route('/Findclientrecord', methods=['POST', 'GET'])
 def Findclientrecord():
-	result = cl.Findclientrecord(request)
-	return jsonify(result=result)
-    
+    result = cl.Findclientrecord(request)
+    return jsonify(result=result)
+
 
 @app.route('/FindclientInfos', methods=['POST', 'GET'])
 def FindclientInfos():
-	result = cl.FindclientInfos(request)
-	return jsonify(result=result)
-	    
+    result = cl.FindclientInfos(request)
+    return jsonify(result=result)
+
 
 @app.route('/orders')
 def orders():
@@ -144,10 +150,69 @@ def getOrders():
     return jsonify(result=r)
     db.close()
 
-  
-@app.route('/CreateOrder')
-def CreateOrder():
-    return render_template('pendingorder.html')
+
+@app.route('/createorder/')
+def createOrder():
+    return render_template('createorder.html')
+
+
+@app.route('/createordercontinue', methods=['POST'])
+def createOrderContinue():
+    session['ContactDate'] = request.form.getlist('inputContactDate')[0]
+    session['ExecutionDate'] = request.form.getlist('inputExecutionDate')[0]
+    session['ContactWay'] = request.form.getlist('inputContactWay')[0]
+    return json.dumps({"result": "success"})
+
+
+@app.route('/createorder2/')
+def createOrder2():
+    return render_template('createorder2.html')
+
+
+@app.route('/createordercontinue2', methods=['POST'])
+def createOrderContinue2():
+    session['ServiceId'] = request.form.getlist('inputService')[0]
+    return json.dumps({"result": "success"})
+
+
+@app.route('/createorder3/')
+def createOrder3():
+    return render_template('createorder3.html')
+
+
+@app.route('/createordercontinue3', methods=['POST'])
+def createOrderContinue3():
+    session['WorkerId'] = request.form.getlist('inputWorker')[0]
+    return json.dumps({"result": "success"})
+
+
+@app.route('/createorder4/')
+def createOrder4():
+    return render_template('createorder4.html')
+
+
+@app.route('/createordercontinue4', methods=['POST'])
+def createOrderContinue4():
+    session['ClientId'] = request.form.getlist('inputClient')[0]
+    return json.dumps({"result": "success"})
+
+
+@app.route('/createorder5/')
+def createOrder5():
+    return render_template('createorder5.html')
+
+
+@app.route('/get_recap')
+def getRecap():
+    r = {}
+    r["ContactDate"] = session['ContactDate']
+    r["ExecutionDate"] = session['ExecutionDate']
+    r["ContactWay"] = session['ContactWay']
+    r["ServiceId"] = session['ServiceId']
+    r["WorkerId"] = session['WorkerId']
+    r["ClientId"] = session['ClientId']
+    print r
+    return jsonify(result=r)
 
 
 @app.route('/addNewOrder', methods=['POST', 'GET'])
@@ -161,12 +226,12 @@ def addNewOrder():
     for row1 in rows1:
         d = row1[0]
     cur.execute("SELECT Workers.UID, Workers.Firstname, Workers.Lastname, Workers.PhoneNumber, Workers.LegalID,Workers.Address, Workers.RetrievalRule, Workers.Comments  "
-                    "FROM WorkersJobs "
-                    "INNER JOIN Workers "
-                    "ON Workers.UID = WorkersJobs.WorkerUID "
-                    "INNER JOIN Jobs "
-                    "ON Jobs.UID=WorkersJobs.JobUID "
-                    "WHERE Jobs.UID=%s;" % (d)) 
+                "FROM WorkersJobs "
+                "INNER JOIN Workers "
+                "ON Workers.UID = WorkersJobs.WorkerUID "
+                "INNER JOIN Jobs "
+                "ON Jobs.UID=WorkersJobs.JobUID "
+                "WHERE Jobs.UID=%s;" % (d))
     rows = cur.fetchall()
     r = []
     for row in rows:
