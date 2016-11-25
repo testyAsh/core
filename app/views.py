@@ -5,6 +5,7 @@ import MySQLdb
 import worker_logic as wl
 import client_logic as cl
 import job_logic as jl
+import order_logic as ol
 
 
 def connectDb():
@@ -127,28 +128,8 @@ def orders():
 
 @app.route('/orders/get_orders')
 def getOrders():
-    db, cur = connectDb()
-    cur.execute(
-        "SELECT UID,State,ClientID,WorkerID,Contactthrough,InsertionDate,ExecutionDate,ClientPaidFees,ReportedPaidFees,RetrievalReceived FROM Bookings")
-    rows = cur.fetchall()
-    r = []
-    for row in rows:
-        d = {
-            "uid": row[0],
-            "state": row[1],
-            "clientid": row[2],
-            "workerid": row[3],
-            "contactthrough": row[4],
-            "insertiondate": row[5],
-            "executiondate": row[6],
-            "clientpaidfees": row[4],
-            "reportedpaidfees": row[5],
-            "retrievalreceived": row[6],
-        }
-        print d
-        r.append(d)
-    return jsonify(result=r)
-    db.close()
+    result = ol.getWorkers()
+    return jsonify(result=result)
 
 
 @app.route('/createorder/')
@@ -158,9 +139,7 @@ def createOrder():
 
 @app.route('/createordercontinue', methods=['POST'])
 def createOrderContinue():
-    session['ContactDate'] = request.form.getlist('inputContactDate')[0]
-    session['ExecutionDate'] = request.form.getlist('inputExecutionDate')[0]
-    session['ContactWay'] = request.form.getlist('inputContactWay')[0]
+    ol.createOrderContinue(request)
     return json.dumps({"result": "success"})
 
 
@@ -171,7 +150,7 @@ def createOrder2():
 
 @app.route('/createordercontinue2', methods=['POST'])
 def createOrderContinue2():
-    session['ServiceId'] = request.form.getlist('inputService')[0]
+    ol.createOrderContinue2(request) 
     return json.dumps({"result": "success"})
 
 
@@ -182,7 +161,7 @@ def createOrder3():
 
 @app.route('/createordercontinue3', methods=['POST'])
 def createOrderContinue3():
-    session['WorkerId'] = request.form.getlist('inputWorker')[0]
+    ol.createOrderContinue3(request)
     return json.dumps({"result": "success"})
 
 
@@ -193,7 +172,7 @@ def createOrder4():
 
 @app.route('/createordercontinue4', methods=['POST'])
 def createOrderContinue4():
-    session['ClientId'] = request.form.getlist('inputClient')[0]
+    ol.createOrderContinue4(request)
     return json.dumps({"result": "success"})
 
 
@@ -204,15 +183,8 @@ def createOrder5():
 
 @app.route('/get_recap')
 def getRecap():
-    r = {}
-    r["ContactDate"] = session['ContactDate']
-    r["ExecutionDate"] = session['ExecutionDate']
-    r["ContactWay"] = session['ContactWay']
-    r["ServiceId"] = session['ServiceId']
-    r["WorkerId"] = session['WorkerId']
-    r["ClientId"] = session['ClientId']
-    print r
-    return jsonify(result=r)
+    result = ol.getRecap()
+    return jsonify(result=result)
 
 
 @app.route('/addNewOrder', methods=['POST', 'GET'])
