@@ -8,6 +8,7 @@ $(document).ready(function() {
 function fetchclients() {
     $.getJSON('/Findclientrecord', {
         }, function(data) {
+            if (data.result.length != 0) {
             var i;
             clients = new Array();
             for (i=0;i<data.result.length;i++)
@@ -25,6 +26,20 @@ function fetchclients() {
             }
             clients.sort();
             createclientList(clients);
+        }
+
+        else {
+    
+            document.getElementById("submit").style.visibility="hidden"
+            document.getElementById("submit1").style.visibility="visible"
+            successAlert = '<div class="alert alert-dismissable alert-danger">';
+                successAlert += '<button type="button" class="close" data-dismiss="alert">×</button>';
+                successAlert += 'Client introuvable, veuillez le rajouter;';
+                successAlert += '</div>';
+                document.getElementById("alert-div").innerHTML = successAlert;
+
+                
+        }
     });
 }
 
@@ -56,5 +71,13 @@ $(function() {
                 alert("Erreur");
             }
         });
+    });
+});
+
+$(function() {
+    $("button#submit1").click(function() {
+
+        window.location.href = "/addClient"
+        
     });
 });
