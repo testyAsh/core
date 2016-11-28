@@ -43,16 +43,17 @@ def createOrderContinue(request):
     return True
 
 def createOrderContinue2(request):
+    session['ClientId'] = request.form.getlist('inputClient')[0]
+    return True     
+
+def createOrderContinue3(request):
     session['ServiceId'] = request.form.getlist('inputService')[0]
     return True    
 
-def createOrderContinue3(request):
+def createOrderContinue4(request):
     session['WorkerId'] = request.form.getlist('inputWorker')[0]
     return True
 
-def createOrderContinue4(request):
-    session['ClientId'] = request.form.getlist('inputClient')[0]
-    return True 
 
 def getRecap():
     r = {}

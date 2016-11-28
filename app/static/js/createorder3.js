@@ -1,45 +1,37 @@
 $(document).ready(function() {
-    fetchworkers();
+    fetchjobs();
 });
 
-function fetchworkers() {
-    $.getJSON('/workers/get_workers_specialised', {
+function fetchjobs() {
+    $.getJSON('/jobs/get_jobs', {
         }, function(data) {
             var i;
-            workers = new Array();
+            jobs = new Array();
             for (i=0;i<data.result.length;i++)
             {
-                var worker = new Array();
-                worker[0]=data.result[i].uid;
-                worker[1]=data.result[i].firstname;
-                worker[2]=data.result[i].lastname;
-                worker[3]=data.result[i].phonenumber;
-                worker[4]=data.result[i].legalid;
-                worker[5]=data.result[i].address;
-                worker[6]=data.result[i].job;
-                worker[7]=data.result[i].retrievalrule;
-                worker[8]=data.result[i].comments;
-                workers[i]=worker;
-                console.log(worker)
+                var job = new Array();
+                job[0]=data.result[i].uid;
+                job[1]=data.result[i].name;
+                jobs[i]=job;
             }
-            workers.sort();
-            createworkerList(workers);
+            jobs.sort();
+            createjobList(jobs);
     });
 }
 
-function createworkerList(){
+function createjobList(){
     var i;
     var html = '';
-    for (i=0;i<workers.length;i++)
+    for (i=0;i<jobs.length;i++)
     {
         html += '<div class="form-check">'
         html += '<label class="form-check-label">'
-        html += '<input type="radio" class="form-check-input" name="inputWorker" id="optionsRadios'+ workers[i][0] +'" value="' + workers[i][0] + '" checked>'
-        html += workers[i][1] + " " + workers[i][2] 
+        html += '<input type="radio" class="form-check-input" name="inputService" id="optionsRadios'+ jobs[i][0] +'" value="' + jobs[i][0] + '" checked>'
+        html += jobs[i][1]
         html += '</label>'
         html += '</div>'
     }
-    document.getElementById("workerList").innerHTML = html;
+    document.getElementById("jobList").innerHTML = html;
 }
 
 $(function() {
@@ -57,3 +49,10 @@ $(function() {
         });
     });
 });
+
+
+
+
+
+
+

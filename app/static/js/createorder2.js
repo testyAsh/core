@@ -1,37 +1,43 @@
 $(document).ready(function() {
-    fetchjobs();
+    fetchclients();
 });
 
-function fetchjobs() {
-    $.getJSON('/jobs/get_jobs', {
+function fetchclients() {
+    $.getJSON('/clients/get_clients', {
         }, function(data) {
             var i;
-            jobs = new Array();
+            clients = new Array();
             for (i=0;i<data.result.length;i++)
             {
-                var job = new Array();
-                job[0]=data.result[i].uid;
-                job[1]=data.result[i].name;
-                jobs[i]=job;
+                var client = new Array();
+                client[0]=data.result[i].uid;
+                client[1]=data.result[i].firstname;
+                client[2]=data.result[i].lastname;
+                client[3]=data.result[i].phonenumber;
+                client[4]=data.result[i].preferredcontact;
+                client[5]=data.result[i].address;
+                client[6]=data.result[i].comments;
+                clients[i]=client;
+                console.log(client);
             }
-            jobs.sort();
-            createjobList(jobs);
+            clients.sort();
+            createclientList(clients);
     });
 }
 
-function createjobList(){
+function createclientList(){
     var i;
     var html = '';
-    for (i=0;i<jobs.length;i++)
+    for (i=0;i<clients.length;i++)
     {
         html += '<div class="form-check">'
         html += '<label class="form-check-label">'
-        html += '<input type="radio" class="form-check-input" name="inputService" id="optionsRadios'+ jobs[i][0] +'" value="' + jobs[i][0] + '" checked>'
-        html += jobs[i][1]
+        html += '<input type="radio" class="form-check-input" name="inputClient" id="optionsRadios'+ clients[i][0] +'" value="' + clients[i][0] + '" checked>'
+        html += clients[i][1] + " " + clients[i][2]
         html += '</label>'
         html += '</div>'
     }
-    document.getElementById("jobList").innerHTML = html;
+    document.getElementById("clientList").innerHTML = html;
 }
 
 $(function() {
