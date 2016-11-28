@@ -51,18 +51,7 @@ def addNewClient(request):
     db.close()
     return True
 
-def Findclientrecord(request):
-    db, cur = connectDb()
-    lastname = request.form['Nom']
-    firstname = request.form['Prenom']
-    print firstname,lastname
-    cur.execute("SELECT FirstName, LastName, COUNT(*) FROM Clients WHERE (FirstName = %s OR LastName = %s OR FirstName = %s OR LastName = %s) GROUP BY Firstname",(firstname,firstname,lastname,lastname))
-    print firstname, lastname
-    cur.execute("SELECT FirstName, LastName, COUNT(*) FROM Clients WHERE (FirstName = %s OR LastName = %s OR FirstName = %s OR LastName = %s) GROUP BY Firstname",
-                (firstname, firstname, lastname, lastname))
-# gets the number of rows affected by the command executed
-    row_count = cur.rowcount
-    print("number of affected rows: {}".format(row_count))
+def Findclientrecord(lastname,firstname):
     db, cur = connectDb()
     cur.execute("SELECT UID,FirstName,LastName,PhoneNumber,PreferredContact,Address,Comments FROM Clients WHERE (FirstName = %s OR LastName = %s OR FirstName = %s OR LastName = %s)",
                 (firstname, firstname, lastname, lastname))

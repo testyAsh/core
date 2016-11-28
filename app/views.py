@@ -110,9 +110,12 @@ def Findclient():
 
 @app.route('/Findclientrecord', methods=['POST', 'GET'])
 def Findclientrecord():
-    result = cl.Findclientrecord(request)
+    if ("ClientLastname" and "ClientFirstname" ) in session:
+        result = cl.Findclientrecord(session['ClientLastname'],session['ClientFirstname'])
+    else:
+        result = wl.getClients()
     return jsonify(result=result)
-
+    
 
 @app.route('/FindclientInfos', methods=['POST', 'GET'])
 def FindclientInfos():
@@ -141,6 +144,16 @@ def createOrder():
 def createOrderContinue():
     ol.createOrderContinue(request)
     return json.dumps({"result": "success"})
+
+@app.route('/createorder1/')
+def createOrder1():
+    return render_template('createorder1.html')
+
+
+@app.route('/createordercontinue1', methods=['POST'])
+def createOrderContinue1():
+    ol.createOrderContinue1(request)
+    return json.dumps({"result": "success"})    
 
 
 @app.route('/createorder2/')

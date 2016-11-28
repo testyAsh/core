@@ -36,15 +36,22 @@ def getOrders():
     db.close()
     return r
 
+def createOrderContinue1(request):
+    session['ClientLastname'] = request.form.getlist('inputLastName')[0]
+    session['ClientFirstname'] = request.form.getlist('inputFirstName')[0]
+    return True   
+
+def createOrderContinue2(request):
+    session['ClientId'] = request.form.getlist('inputClient')[0]
+    return True      
+
 def createOrderContinue(request):
     session['ContactDate'] = request.form.getlist('inputContactDate')[0]
     session['ExecutionDate'] = request.form.getlist('inputExecutionDate')[0]
     session['ContactWay'] = request.form.getlist('inputContactWay')[0]
     return True
 
-def createOrderContinue2(request):
-    session['ClientId'] = request.form.getlist('inputClient')[0]
-    return True     
+   
 
 def createOrderContinue3(request):
     session['ServiceId'] = request.form.getlist('inputService')[0]

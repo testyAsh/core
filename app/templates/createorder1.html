@@ -63,14 +63,20 @@
                         <h1>Selectionner le client</h1> 
                     </div>
                     <div class="col-lg-12">
+                    <form id="lookup">
+                    <legend>Chercher Client</legend>
+                         <div class="form-group"> 
+                            <label for="inputLastName">Nom</label>
+                            <input type="text" class="form-control" id="inputLastName" name="inputLastName" placeholder="Nom du client">
+                          </div>
+                          <div class="form-group"> 
+                            <label for="inputFirstName">Prénom</label>
+                            <input type="text" class="form-control" id="inputFirstName" name="inputFirstName" placeholder="Prénom du client">
+                          </div>
 
-                        <form >
-                          <fieldset class="form-group" id="inputClient">
-                              <legend>Clients</legend>
-                              <div id="clientList"></div>
-                          </fieldset>
-                          <button type="button" class="btn btn-primary" id="submit">Continuer</button>
+                          <button type="button" class="btn btn-primary" id="submit">Chercher</button>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -86,7 +92,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../static/js/bootstrap.min.js"></script>
 
-    <script src="../static/js/createorder2.js"></script>
+    <script src="../static/js/createorder1.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>

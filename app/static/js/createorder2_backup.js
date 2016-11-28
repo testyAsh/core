@@ -1,12 +1,9 @@
-
-
 $(document).ready(function() {
     fetchclients();
 });
 
-
 function fetchclients() {
-    $.getJSON('/Findclientrecord', {
+    $.getJSON('/clients/get_clients', {
         }, function(data) {
             var i;
             clients = new Array();
@@ -48,7 +45,7 @@ $(function() {
         $.ajax({
             type: "POST",
             url: "/createordercontinue2",
-            data: $("form").serialize(),
+            data: $('form').serialize(),
             success: function(msg) {
                 window.location.href = "/createorder3/"
             },
