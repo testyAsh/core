@@ -34,7 +34,6 @@ function createjobList(){
     document.getElementById("jobList").innerHTML = html;
 }
 
-$(function() {
     $("button#submit").click(function() {
         $.ajax({
             type: "POST",
@@ -48,6 +47,11 @@ $(function() {
             }
         });
     });
+
+$("button#cancel").click(function() {
+
+        window.location.href = "/index"
+        
 });
 
 

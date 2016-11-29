@@ -58,7 +58,6 @@ function createclientList(){
     document.getElementById("clientList").innerHTML = html;
 }
 
-$(function() {
     $("button#submit").click(function() {
         $.ajax({
             type: "POST",
@@ -72,12 +71,16 @@ $(function() {
             }
         });
     });
-});
 
-$(function() {
-    $("button#submit1").click(function() {
+
+$("button#submit1").click(function() {
 
         window.location.href = "/addClient"
         
     });
+
+$("button#cancel").click(function() {
+
+        window.location.href = "/index"
+        
 });
