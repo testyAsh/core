@@ -24,6 +24,15 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+   <style>
+ #map {
+   width: 100%;
+   height: 400px;
+   background-color: grey;
+ }
+</style>
+ 
+
 </head>
 
 <body>
@@ -74,6 +83,9 @@
                     </div>
                 </div>
             </div>
+
+            <div id="map"></div>
+
         </div>
         <!-- /#page-content-wrapper -->
 
@@ -95,6 +107,10 @@
         $("#wrapper").toggleClass("toggled");
     });
     </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoz8IW2t7eHLqCZlNT0MeOyPnndjBSkfg&callback=initMap">
+    </script>
+
 
 </body>
 
