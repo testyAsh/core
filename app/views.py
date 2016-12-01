@@ -119,7 +119,7 @@ def Findclientrecord():
 
 @app.route('/FindclientInfos', methods=['POST', 'GET'])
 def FindclientInfos():
-    result = cl.FindclientInfos(request)
+    result = cl.FindclientInfos(session['ClientId'])
     return jsonify(result=result)
 
 
@@ -131,7 +131,7 @@ def orders():
 
 @app.route('/orders/get_orders')
 def getOrders():
-    result = ol.getWorkers()
+    result = ol.getOrders()
     return jsonify(result=result)
 
 
@@ -185,8 +185,8 @@ def createOrder4():
 
 @app.route('/createordercontinue4', methods=['POST'])
 def createOrderContinue4():
-    ol.createOrderContinue4(request)
-    return json.dumps({"result": "success"})
+    result = ol.createOrderContinue4(request)
+    return json.dumps({"result" : "success"})
 
 
 @app.route('/createorder5/')

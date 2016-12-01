@@ -1,3 +1,7 @@
+
+
+var add = new Array();
+
 $(document).ready(function() {
     fetchworkers();
 });
@@ -23,7 +27,10 @@ function fetchworkers() {
                 console.log(worker)
             }
             workers.sort();
+            add = workers;
             createworkerList(workers);
+            // var r = fetchlient();
+            // console.log(r);
     });
 }
 
@@ -49,6 +56,9 @@ function createworkerList(){
             url: "/createordercontinue4",
             data: $('form').serialize(),
             success: function(msg) {
+
+                console.log("add =" + add)
+
                 window.location.href = "/createorder5/"
             },
             error: function() {
@@ -64,14 +74,34 @@ $("button#cancel").click(function() {
         
 });
 
-function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
+
+
+
+      function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 4,
-          center: uluru
+          center: {lat: 36.8617342, lng: 10.276935099999946}
         });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
+        var geocoder = new google.maps.Geocoder();
+
+        document.getElementById('submit1').addEventListener('click', function() {
+          geocodeAddress(geocoder, map);
         });
+      }
+
+      function geocodeAddress(geocoder, resultsMap) {
+        for (i=0;i<add.length;i++) {
+        var address = add[i][5] ;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+    }
       }

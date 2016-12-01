@@ -2,6 +2,7 @@ from flask import session
 import MySQLdb
 
 
+
 def connectDb():
     db = MySQLdb.connect(host="localhost",
                          user="kazafix",
@@ -55,12 +56,11 @@ def createOrderContinue(request):
 
 def createOrderContinue3(request):
     session['ServiceId'] = request.form.getlist('inputService')[0]
-    return True    
+    return True
 
 def createOrderContinue4(request):
     session['WorkerId'] = request.form.getlist('inputWorker')[0]
     return True
-
 
 def getRecap():
     r = {}
