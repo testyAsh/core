@@ -84,6 +84,7 @@ def FindclientInfos(idclient):
             "firstname": row[1],
             "lastname": row[2],
             "phonenumber": row[3],
+            "PreferredContact": row[4],
             "address": row[5],
             "comments": row[6],
         }
