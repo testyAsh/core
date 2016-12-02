@@ -1,3 +1,4 @@
+from flask import session
 import MySQLdb
 
 
@@ -48,6 +49,14 @@ def addNewClient(request):
     cur.execute(query, fields)
     db.commit()
     print "Registered"
+    newfields = (firstname, lastname, phonenumber)
+    newquery = "SELECT UID FROM Clients WHERE (FirstName = %s AND LastName = %s AND PhoneNumber = %s)"
+    cur.execute(newquery, newfields)
+    rows = cur.fetchall()
+    for row in rows:
+        r=row[0]
+    print r
+    session['ClientId'] = r     
     db.close()
     return True
 

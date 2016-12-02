@@ -1,5 +1,5 @@
 $(function() {
-    $('button').click(function() {
+    $("button#submit").click(function() {
         var lastname = $('#txtNom').val();
         var firstname = $('#txtPrenom').val();
         var phonenumber = $('#txtNumero').val();
@@ -17,6 +17,8 @@ $(function() {
                 successAlert += 'le nouveau client a été ajouté avec succès';
                 successAlert += '</div>';
                 document.getElementById("alert-div").innerHTML = successAlert;
+                document.getElementById("submit").style.visibility="hidden";
+                document.getElementById("resume").style.visibility="visible";
             },
             error: function(error) {
                 console.log(error);
@@ -30,3 +32,10 @@ $(function() {
          console.log("foobar");
     });
 });
+
+
+$("button#resume").click(function() {
+
+        window.location.href = "/createorder3/"
+        
+    });
