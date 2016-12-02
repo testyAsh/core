@@ -63,12 +63,37 @@ def createOrderContinue4(request):
     return True
 
 def getRecap():
+    db, cur = connectDb() 
+    cur.execute("SELECT FirstName,LastName,PhoneNumber,Address FROM Clients WHERE (UID = %s)",(session['ClientId'],))
+    rows = cur.fetchall()
+    for row in rows:
+            prenom = row[0]
+            nom = row[1]
+            numero = row[2]
+            address = row[3]
+    cur.execute("SELECT name FROM Jobs WHERE (UID = %s)",(session['ServiceId'],))
+    rows = cur.fetchall()
+    for row in rows:
+            service = row[0]
+    cur.execute("SELECT FirstName,LastName,PhoneNumber FROM Workers WHERE (UID = %s)",(session['WorkerId'],))
+    rows = cur.fetchall()  
+    for row in rows:
+            prenomouv = row[0]
+            nomouv = row[1]
+            numeroouv = row[2]
+                   
     r = {}
+    r["Clientprenom"] = prenom
+    r["clientnom"] = nom
+    r["telclient"] = numero
+    r["Adressclient"] = address
     r["ContactDate"] = session['ContactDate']
     r["ExecutionDate"] = session['ExecutionDate']
     r["ContactWay"] = session['ContactWay']
-    r["ServiceId"] = session['ServiceId']
-    r["WorkerId"] = session['WorkerId']
-    r["ClientId"] = session['ClientId']
+    r["Service"] = service
+    r["Workerprenom"] = prenomouv
+    r["Workernom"] = nomouv
+    r["Workertel"] = numeroouv
     print r
+    db.close()
     return r      
