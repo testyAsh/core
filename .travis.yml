@@ -5,10 +5,10 @@ services:
   - docker
   
 script:
-  - docker build .
+  - docker build . -t jackjackjack/core:$COMMIT
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push jackjackjack/core;
+    docker push jackjackjack/core:$COMMIT;
     fi
