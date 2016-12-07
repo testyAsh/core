@@ -1,7 +1,17 @@
 sudo: required
 
+travis env set DOCKER_EMAIL me@example.com
+travis env set DOCKER_USERNAME myusername
+travis env set DOCKER_PASSWORD secretsecret
+
 services:
   - docker
   
 script:
   - docker build .
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push jackjackjack/core;
+    fi
