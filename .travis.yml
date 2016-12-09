@@ -14,4 +14,4 @@ after_success:
 
 deploy:
   - docker pull shrobs/climulon:latest
-  - climulon deploy kazafix/core:latest
+  - docker run shrobs/climulon:latest "climulon deploy kazafix/core:latest"
