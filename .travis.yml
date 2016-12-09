@@ -1,14 +1,17 @@
 sudo: required
 
-
 services:
   - docker
   
 script:
-  - docker build . -t jackjackjack/core:latest
+  - docker build . -t kazafix/core:latest
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push jackjackjack/core:latest;
+    docker push kazafix/core:latest;
     fi
+
+deploy:
+  - docker pull shrobs/climulon:latest
+  - climulon deploy kazafix/core:latest
